@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#A5CE4A"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="50dp"
+        android:background="#F0F0F0" >
+
+        <ScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" >
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical" >
+				
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginTop="60dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="#D8D8D8" />
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="50dp"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/regist_usernickname"
+                        android:textColor="@color/user_modify_color"
+                        android:textSize="@dimen/setting_font_size" />
+
+                    <TextView
+                        android:layout_width="2dp"
+                        android:layout_height="fill_parent"
+                        android:background="#D8D8D8" />
+
+                    <EditText
+                        android:id="@+id/display_name"
+                        android:layout_width="0dp"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="3" 
+                        android:gravity="center"
+                        android:singleLine="true"
+                        android:background="#00000000"
+                        android:textSize="@dimen/setting_font_size"
+                        android:textColor="@color/user_modify_color"/>
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="2dp"
+                    android:layout_margin="10dp"
+                    android:background="#D8D8D8" />
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="50dp"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/usermodify_userphone"
+                        android:textColor="@color/user_modify_color"
+                        android:textSize="@dimen/setting_font_size" />
+
+                    <TextView
+                        android:layout_width="2dp"
+                        android:layout_height="fill_parent"
+                        android:background="#D8D8D8" />
+
+                    <EditText
+                        android:id="@+id/user_phone"
+                        android:layout_width="0dp"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="3" 
+                        android:gravity="center"
+                        android:singleLine="true"
+                        android:background="#00000000"
+                        android:textSize="@dimen/setting_font_size"
+                        android:textColor="@color/user_modify_color"/>
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="2dp"
+                    android:layout_margin="10dp"
+                    android:background="#D8D8D8" />
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="50dp"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/regist_useremail"
+                        android:textColor="@color/user_modify_color"
+                        android:textSize="@dimen/setting_font_size" />
+
+                    <TextView
+                        android:layout_width="2dp"
+                        android:layout_height="fill_parent"
+                        android:background="#D8D8D8" />
+
+                    <EditText
+                        android:id="@+id/user_email"
+                        android:layout_width="0dp"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="3" 
+                        android:gravity="center"
+                        android:singleLine="true"
+                        android:background="#00000000"
+                        android:textSize="@dimen/setting_font_size"
+                        android:textColor="@color/user_modify_color"/>
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="2dp"
+                    android:layout_margin="10dp"
+                    android:background="#D8D8D8" />
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="50dp"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/usermodify_softver"
+                        android:textColor="@color/user_modify_color"
+                        android:textSize="@dimen/setting_font_size" />
+
+                    <TextView
+                        android:layout_width="2dp"
+                        android:layout_height="fill_parent"
+                        android:background="#D8D8D8" />
+
+                    <TextView
+                        android:id="@+id/soft_ver"
+                        android:layout_width="0dp"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="3" 
+                        android:gravity="center"
+                        android:background="#00000000"
+                        android:singleLine="true"
+                        android:textSize="@dimen/setting_font_size"
+                        android:textColor="@color/user_modify_color"/>
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="2dp"
+                    android:layout_margin="10dp"
+                    android:background="#D8D8D8" />
+                
+                
+                <ImageButton 
+                    android:id="@+id/sub_userinfo"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginBottom="30dp"
+                    android:background="#00000000"
+                    android:src="@drawable/usermodify_ok"
+                    android:scaleType="centerInside"/>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F0F0F0"
+    android:orientation="vertical" >
+    <TextView 
+        android:layout_width="fill_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="#CCCCCC"/>
+	
+	<ListView 
+	    android:id="@+id/timer_center_timelist"
+	    android:layout_height="wrap_content"
+	    android:layout_width="fill_parent"
+	    android:layout_marginLeft="10dp"
+	    android:layout_marginRight="10dp"
+	    android:divider="#CCCCCC"
+	    android:dividerHeight="2dp">
+	</ListView>
+	<TextView 
+        android:layout_width="fill_parent"
+        android:layout_height="2dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="#CCCCCC"/>
+	<RelativeLayout 
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent"
+	    android:layout_margin="10dp">
+	    <ImageButton 
+	        android:id="@+id/timer_center_timeaddbtn"
+	        android:layout_width="fill_parent"
+	        android:layout_height="40dp"
+	        android:layout_alignParentBottom="true"
+	        android:layout_marginBottom="30dp"
+	        android:background="@drawable/timer_center_add_btn"/>
+	</RelativeLayout>
+</LinearLayout>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F0F0F0"
+    android:orientation="vertical" >
+    
+    <ScrollView 
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+        <LinearLayout 
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+            
+            <LinearLayout 
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+            <ImageView 
+                android:layout_width="100dp"
+                android:layout_height="80dp"
+                android:layout_marginTop="40dp"
+                android:scaleType="centerInside"/>
+
+            <EditText
+                android:id="@+id/router_ssid"
+                android:layout_width="280dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/login_ev_username_bg"
+                android:ems="10"
+                android:gravity="center"
+                android:hint="@string/inputssid"
+                android:paddingLeft="60dp"
+                android:singleLine="true" >
+
+                <requestFocus />
+            </EditText>
+
+            <EditText 
+                android:id="@+id/router_pswd"
+                android:layout_width="280dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:singleLine="true"
+                android:paddingLeft="60dp"
+                android:background="@drawable/login_ev_userpswd_bg"
+                android:hint="@string/inputSSIDpswd"
+                />
+            </LinearLayout>
+            <RelativeLayout 
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp">
+            <ImageButton 
+                android:id="@+id/start_smartlink"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_centerInParent="true"
+                android:background="#00000000"
+                android:src="@drawable/smartlink_btn_start"
+                android:scaleType="centerInside"/>
+            <ImageView 
+                android:layout_width="120dp"
+                android:layout_height="105dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="-20dp"
+                />
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

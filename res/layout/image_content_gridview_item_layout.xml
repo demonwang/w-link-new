@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="80dp"
+    android:layout_height="80dp"
+    android:gravity="center"
+   >
+   <RelativeLayout 
+       android:layout_width="80dp"
+       android:layout_height="80dp"
+       android:background="#F7F7F7">
+	<ImageView 
+	    android:id="@+id/image_content_item_image"
+	    android:layout_width="60dp"
+	    android:layout_height="60dp"
+	    android:layout_centerInParent="true"
+	    android:scaleType="centerInside"
+	    android:src="@drawable/tablight"
+	    />
+	<ImageView 
+	    android:id="@+id/image_content_item_select_flag"
+	    android:layout_width="20dp"
+	    android:layout_height="20dp"
+	    android:layout_alignParentRight="true"
+	    android:layout_alignParentBottom="true"
+	    android:layout_marginRight="5dp"
+	    android:layout_marginBottom="5dp"
+	    android:src="@drawable/image_content_item_select_flag"/>
+	</RelativeLayout>
+</LinearLayout>

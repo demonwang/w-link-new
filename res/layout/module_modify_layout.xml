@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:background="#F0F0F0"
+    android:orientation="vertical" >
+     <ImageView
+        android:id="@+id/modulemodify_module_imag"
+        android:layout_width="122dp"
+        android:layout_height="122dp"
+        android:layout_marginTop="40dp"
+        android:src="@drawable/tablight" />
+	<LinearLayout 
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_gravity="center"
+	    android:padding="30dp"
+	    android:gravity="center"
+	    android:orientation="vertical">
+	    <EditText 
+	        android:id="@+id/module_name"
+	        android:layout_width="fill_parent"
+	        android:layout_height="40dp"
+	        android:background="@drawable/editext_bg"
+	        android:paddingLeft="10dp"
+	        android:hint="@string/module_modify_module_name"
+	        android:ems="16"/>
+	    <Button 
+	        android:id="@+id/module_image"
+	        android:layout_width="fill_parent"
+	        android:layout_marginTop="30dp"
+	        android:layout_height="40dp"
+	        android:background="#8FC321"
+	        android:textColor="#FFFFFF"
+	        android:text="@string/module_modify_choise_img"/>
+	    <Button 
+	        android:id="@+id/module_delete"
+	        android:layout_width="fill_parent"
+	        android:layout_marginTop="30dp"
+	        android:layout_height="40dp"
+	        android:background="#F6AB00"
+	        android:textColor="#FFFFFF"
+	        android:text="@string/module_modify_module_delete"/>
+	</LinearLayout>
+</LinearLayout>

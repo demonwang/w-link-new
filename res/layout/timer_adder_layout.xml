@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#A5CE4A"
+    android:orientation="vertical" >
+
+    <RadioGroup
+        android:id="@+id/timer_adder_mode"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <RadioButton
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:background="@drawable/radio"
+            android:button="@null"
+            android:gravity="center"
+            android:text="单次定时" />
+
+        <RadioButton
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="3dp"
+            android:layout_weight="1"
+            android:background="@drawable/radio"
+            android:button="@null"
+            android:gravity="center"
+            android:text="周定时" />
+    </RadioGroup>
+	
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_margin="10dp"
+        android:background="#F0F0F0"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:id="@+id/loops"
+            android:layout_width="fill_parent"
+            android:layout_height="80dp"
+            android:gravity="bottom|center_horizontal"
+            android:orientation="horizontal"
+            android:visibility="visible" >
+
+            <CheckBox
+                android:id="@+id/check1"
+                android:layout_width="24dp"
+                android:layout_height="20dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/loop_checkboxbg"
+                android:button="@null" />
+
+            <CheckBox
+                android:id="@+id/check2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:button="@null"
+                android:text="一"
+                android:textColor="#8EC31D"
+                android:textSize="@dimen/setting_font_size" />
+
+            <CheckBox
+                android:id="@+id/check3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:button="@null"
+                android:text="二"
+                android:textColor="#8EC31D"
+                android:textSize="@dimen/setting_font_size" />
+
+            <CheckBox
+                android:id="@+id/check4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:button="@null"
+                android:text="三"
+                android:textColor="#8EC31D"
+                android:textSize="@dimen/setting_font_size" />
+
+            <CheckBox
+                android:id="@+id/check5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:button="@null"
+                android:text="四"
+                android:textColor="#8EC31D"
+                android:textSize="@dimen/setting_font_size" />
+
+            <CheckBox
+                android:id="@+id/check6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:button="@null"
+                android:text="五"
+                android:textColor="#8EC31D"
+                android:textSize="@dimen/setting_font_size" />
+
+            <CheckBox
+                android:id="@+id/check7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:button="@null"
+                android:text="六"
+                android:textColor="#8EC31D"
+                android:textSize="@dimen/setting_font_size" />
+
+            <CheckBox
+                android:id="@+id/check8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:button="@null"
+                android:text="日"
+                android:textColor="#8EC31D"
+                android:textSize="@dimen/setting_font_size" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="#C0C0C0" />
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="80dp"
+            android:layout_margin="10dp" >
+
+            <ImageView
+                android:id="@+id/open_stat"
+                android:layout_width="65dp"
+                android:layout_height="25dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/open_time" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="80dp"
+                android:gravity="center" >
+
+                <EditText
+                    android:id="@+id/fri_mon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/editext_bg"
+                    android:ems="2"
+                    android:gravity="center"
+                    android:singleLine="true"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="-" />
+
+                <EditText
+                    android:id="@+id/fri_day"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/editext_bg"
+                    android:ems="2"
+                    android:gravity="center"
+                    android:singleLine="true"
+                    android:textSize="12sp" />
+
+                <EditText
+                    android:id="@+id/fri_hour"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:background="@drawable/editext_bg"
+                    android:ems="2"
+                    android:gravity="center"
+                    android:singleLine="true"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=":" />
+
+                <EditText
+                    android:id="@+id/fri_min"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/editext_bg"
+                    android:ems="2"
+                    android:gravity="center"
+                    android:singleLine="true"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <com.hfapp.view.MySwitch
+                android:id="@+id/open_switch"
+                android:layout_width="35dp"
+                android:layout_height="11dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="20dp" >
+            </com.hfapp.view.MySwitch>
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="#C0C0C0" />
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="80dp"
+            android:layout_margin="10dp" >
+
+            <ImageView
+                android:id="@+id/close_stat"
+                android:layout_width="65dp"
+                android:layout_height="25dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/close_timw" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="80dp"
+                android:gravity="center" >
+
+                <EditText
+                    android:id="@+id/sec_mon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/editext_bg"
+                    android:ems="2"
+                    android:gravity="center"
+                    android:singleLine="true"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="-" />
+
+                <EditText
+                    android:id="@+id/sec_day"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/editext_bg"
+                    android:ems="2"
+                    android:gravity="center"
+                    android:singleLine="true"
+                    android:textSize="12sp" />
+
+                <EditText
+                    android:id="@+id/sec_hour"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:background="@drawable/editext_bg"
+                    android:ems="2"
+                    android:gravity="center"
+                    android:singleLine="true"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=":" />
+
+                <EditText
+                    android:id="@+id/sec_min"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/editext_bg"
+                    android:ems="2"
+                    android:gravity="center"
+                    android:singleLine="true"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <com.hfapp.view.MySwitch
+                android:id="@+id/close_switch"
+                android:layout_width="35dp"
+                android:layout_height="11dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="20dp" >
+            </com.hfapp.view.MySwitch>
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="#C0C0C0" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center" >
+
+            <ImageButton
+                android:id="@+id/submit_addtimer"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:background="#00000000"
+                android:scaleType="centerInside"
+                android:src="@drawable/timer_adder_sub_btn" />
+        </LinearLayout>
+    </LinearLayout>
+	
+</LinearLayout>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#00000000"
+    android:orientation="vertical" >
+    <ImageView 
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginBottom="50dp"
+        android:src="@drawable/module_list_bg"
+        android:scaleType="center"/>
+    <com.hfapp.view.ModuleListView
+        android:id="@+id/module_list"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="#00000000"
+        android:layout_marginBottom="50dp"/>
+<ImageButton 
+    android:id="@+id/add_btn"
+    android:layout_width="fill_parent"
+    android:layout_height="50dp"
+    android:layout_alignParentBottom="true"
+    android:padding="5dp"
+    android:background="#F0F0F0"
+    android:src="@drawable/add_icon"
+    android:scaleType="centerInside"/>
+</RelativeLayout>

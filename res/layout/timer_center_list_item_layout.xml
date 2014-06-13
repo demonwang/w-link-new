@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F0F0F0"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:orientation="horizontal" >
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/timer_center_list_date1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:textColor="#90C31E"
+                android:text="04-25	08:03" />
+
+            <TextView
+                android:id="@+id/timer_center_list_date2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center_vertical"
+                 android:textColor="#90C31E"
+                android:text="04-25	08:04" />
+        </LinearLayout>
+		<TextView 
+		    android:layout_width="2dp"
+		    android:layout_height="fill_parent"
+		    android:layout_marginTop="10dp"
+		    android:layout_marginBottom="3dp"
+		    android:background="#CCCCCC"/>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical" >
+            
+            <TextView
+                android:id="@+id/timer_center_list_date1_stat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                 android:textColor="#90C31E"
+                android:text="enable" />
+
+            <TextView
+                android:id="@+id/timer_center_list_date2_stat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center"
+                 android:textColor="#90C31E"
+                android:text="unable" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="2"
+            android:gravity="center"
+            
+            android:orientation="vertical" >
+            <com.hfapp.view.MySwitch 
+                android:id="@+id/timer_list_item_switch"
+                android:layout_width="50dp"
+                android:layout_height="15dp"
+                android:layout_gravity="center">
+            </com.hfapp.view.MySwitch>
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:orientation="horizontal">
+        <TextView 
+            android:id="@+id/timer_list_item_isloop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/setting_font_size"
+            android:textColor="#9F9F9F"
+            android:text="@string/timer_add_timer_stat_isloop"/>
+         <TextView 
+             android:id="@+id/timer_list_item_loopday"
+            android:layout_marginLeft="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#9F9F9F"
+            android:text="@string/timer_thursday"/>
+    </LinearLayout>
+
+</LinearLayout>

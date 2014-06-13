@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <color name="blue_yellow">#8FBF13</color>
+    <color name="gray">#9B9B9B</color>
+    <color name="title_color">#8FC320</color>
+    <color name="white">#FFFFFF</color>
+    <color name="registbtnbg">#F6AB00</color>
+    <color name="selected">#A5CE4A</color>
+    <color name="unselected">#9DCA39</color>
+    
+    <color name="setting_select_color">#F6AB00</color>
+    
+    <color name="user_modify_color">#93C21C</color>
+   	<color name="green">#8FC320</color>
+    <color name="black">#283B03</color>
+    <color name="adc_gray">#F0F0F0</color>
+    <color name="btn">#00000000</color>
+    <color name="orange">#F6AB00</color>
+</resources>
