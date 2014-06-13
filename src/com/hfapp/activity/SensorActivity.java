@@ -175,6 +175,11 @@ public class SensorActivity extends Activity {
 			public void onClick(View v) {
 				//1,判断按钮打开，或关闭状态.蓝色为打开，
 				//2,打开后，判断传感器的
+				if(getAutoStatus()){
+					saveAutoStatus(false);
+				}else{
+					saveAutoStatus(true);
+				}			
 				finish();
 			}
 		});
@@ -189,6 +194,18 @@ public class SensorActivity extends Activity {
 	}
 
 	
+	
+	public  boolean getAutoStatus(){
+		SharedPreferences sp = getSharedPreferences("AUTOSTATUS", MODE_PRIVATE);
+		return sp.getBoolean(mac, false);
+	}
+	
+	public  void saveAutoStatus(boolean b){
+		SharedPreferences sp = getSharedPreferences("AUTOSTATUS", MODE_PRIVATE);
+		Editor e = sp.edit();
+		e.putBoolean(mac, b);
+		e.commit();
+	}
 	
 	// 根据tag值，判断要保存修改的传感器
 	private void save_share() {

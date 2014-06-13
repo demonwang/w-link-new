@@ -1,6 +1,9 @@
 package com.hfapp.activity;
 
 //import android.R;
+import java.util.HashMap;
+import java.util.Iterator;
+
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Notification;
@@ -22,11 +25,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.palytogether.R;
+import com.hf.module.IEventListener;
 import com.hf.module.IModuleManager;
 import com.hf.module.ManagerFactory;
 import com.hf.module.ModuleException;
 import com.hf.module.impl.LocalModuleInfoContainer;
 import com.hf.module.info.ADCinfo;
+import com.hf.module.info.GPIO;
 import com.hf.module.info.ModuleInfo;
 
 /**
@@ -35,7 +40,7 @@ import com.hf.module.info.ModuleInfo;
  * @author Administrator
  * 
  */
-public class ADCModuleActivity extends Activity {
+public class ADCModuleActivity extends Activity implements IEventListener{
 	private static String TAG = "SecondActivity--->";
 	ModuleInfo mi;//设备信息
 	TextView tva, tvb, tvc, tvd, tve, tvf, tvg;
@@ -124,6 +129,9 @@ public class ADCModuleActivity extends Activity {
 		mac = getIntent().getStringExtra("mac");
 		mi = LocalModuleInfoContainer.getInstance().get(mac);//获取设备信息
 		notice = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+		
+		ManagerFactory.getInstance().getManager().registerEventListener(this);
+		
 		initActionbar();
 		init();
 		judge_GPIOState();
@@ -840,5 +848,84 @@ public class ADCModuleActivity extends Activity {
 			}
 		}).start();
 	}
+
+	@Override
+	public void onEvent(String mac, byte[] t2data) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onCloudLogin(boolean loginstat) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onCloudLogout() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onNewDevFind(ModuleInfo mi) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onGPIOEvent(String mac, HashMap<Integer, GPIO> GM) {
+		// TODO Auto-generated method stub
+		if (this.mac.equalsIgnoreCase(mac)) {
+			Log.e("demon","recv GPIO EVENt");
+			Iterator<Integer> it = GM.keySet().iterator();
+			while(it.hasNext()){
+				
+				GPIO g = GM.get(it.next());
+				Log.e("demon",""+g.getId());
+				switch (g.getId()) {
+				case 0:
+					status0 = GM.get(0).getStatus();
+					hand.sendEmptyMessage(7);
+					//open or close 
+					break;
+				case 1:
+					Log.e("demon","3GPIO is ctrled");
+					status1 = GM.get(1).getStatus();
+					hand.sendEmptyMessage(8);
+					// open or close 
+					break;
+				case 2:
+					status2 = GM.get(2).getStatus();
+					hand.sendEmptyMessage(9);
+					break;
+				case 11:
+					status = GM.get(11).getStatus();
+					hand.sendEmptyMessage(6);
+					break;
+				default:
+					break;
+				}
+			}			
+		}
+	}
+
+	@Override
+	public void onTimerEvent(String mac, byte[] t2data) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onUARTEvent(String mac, byte[] userData, boolean chanle) {
+		// TODO Auto-generated method stub
+		
+	}
 	
+	@Override
+	public void finish() {
+		// TODO Auto-generated method stub
+		ManagerFactory.getInstance().getManager().unregisterEventListener(this);
+		super.finish();
+	}
 }

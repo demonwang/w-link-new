@@ -1,6 +1,7 @@
 package com.hfapp.activity;
 
 import java.util.ArrayList;
+import java.util.Hashtable;
 
 import android.annotation.SuppressLint;
 import android.app.Notification;
@@ -22,10 +23,10 @@ import com.hf.module.info.ADCinfo;
 import com.hf.module.info.ModuleInfo;
 
 public class ADC_Service extends Service {
-	IModuleManager manager;//Íê³ÉLkouU¿Ú»ù±¾¹¦ÄÜ·â×°£ºÓÃ»§¹ÜÀí¹¦ÄÜ¡¢Ä£¿é¹ÜÀí¹¦ÄÜ¡¢Éè±¸¿ØÖÆ¹¦ÄÜ¡¢±¾µØĞÄÌø¹¦ÄÜ
-	NotificationManager noticeManager;//×´Ì¬À¸Í¨ÖªµÄ¹ÜÀíÀà£¬¸ºÔğ·¢ËÍÍ¨Öª¡¢Çå³ıÍ¨Öª
-	
-	// µÚÒ»²½£¬³õÊ¼»¯Éè±¸ĞÅÏ¢
+	IModuleManager manager;//å®ŒæˆLkouUå£åŸºæœ¬åŠŸèƒ½å°è£…ï¼šç”¨æˆ·ç®¡ç†åŠŸèƒ½ã€æ¨¡å—ç®¡ç†åŠŸèƒ½ã€è®¾å¤‡æ§åˆ¶åŠŸèƒ½ã€æœ¬åœ°å¿ƒè·³åŠŸèƒ½
+	NotificationManager noticeManager;//çŠ¶æ€æ é€šçŸ¥çš„ç®¡ç†ç±»ï¼Œè´Ÿè´£å‘é€é€šçŸ¥ã€æ¸…é™¤é€šçŸ¥
+	public static Hashtable<String, Boolean> autoList = new Hashtable<String, Boolean>();
+	// ç¬¬ä¸€æ­¥ï¼Œåˆå§‹åŒ–è®¾å¤‡ä¿¡æ¯
 	@Override
 	public void onCreate() {
 		manager = ManagerFactory.getInstance().getManager();
@@ -34,7 +35,7 @@ public class ADC_Service extends Service {
 		super.onCreate();
 	}
 	
-	// µÚ¶ş²½£¬¿ªÊ¼Êı¾İÊı¾İ¶Ô±È
+	// ç¬¬äºŒæ­¥ï¼Œå¼€å§‹æ•°æ®æ•°æ®å¯¹æ¯”
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		
@@ -77,7 +78,7 @@ public class ADC_Service extends Service {
 	String Do;
 	String T2;
 	String H;
-	// »ñÈ¡Éè±¸ĞÅÏ¢Êı¾İ
+	// è·å–è®¾å¤‡ä¿¡æ¯æ•°æ®
 	private void get_data(final String mac){
 		new Thread(new Runnable() {
 			public void run() {
@@ -109,8 +110,23 @@ public class ADC_Service extends Service {
 		}).start();
 	}
 	
-	// ´¦ÀíºóµÄÊı¾İÈç¹û³¬³öÏŞÖÆ£¬ÔòÖ´ĞĞ´ËÍ¨Öª·½·¨
-	private void Notice(String mac){
+	class Value{
+		float limit_low;
+		float limit_up;
+		float value;
+		public Value(float limit_low,float limit_up,float value) {
+			// TODO Auto-generated constructor stub
+			this.limit_low = limit_low;
+			this.limit_up = limit_up;
+			this.value = value;
+		}
+
+	}
+	
+	
+	// å¤„ç†åçš„æ•°æ®å¦‚æœè¶…å‡ºé™åˆ¶ï¼Œåˆ™æ‰§è¡Œæ­¤é€šçŸ¥æ–¹æ³•
+	@SuppressLint("NewApi")
+	private void Notice(final String mac,Value v){
 		ModuleInfo mi = LocalModuleInfoContainer.getInstance().get(mac);
 		if(mi == null)
 			return ;
@@ -118,19 +134,58 @@ public class ADC_Service extends Service {
 		intent.putExtra("mac", mac);
 		PendingIntent pi = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
 		android.app.Notification.Builder notification = new Notification.Builder(this)
-		.setContentTitle("Êı¾İÓĞÒì³£")
+		.setContentTitle("æ•°æ®æœ‰å¼‚å¸¸")
 		.setSmallIcon(R.drawable.ic_launcher)
-		.setContentText(mi.getName()+"Êı¾İ³¬³ö½çÏŞ")
+		.setContentText(mi.getName()+"æ•°æ®è¶…å‡ºç•Œé™")
 		.setPriority(Notification.PRIORITY_DEFAULT)
 		.setDefaults(Notification.DEFAULT_ALL)
 		.setAutoCancel(true)
 		.setContentIntent(pi);
 		noticeManager.notify(100, notification.build());
+		if(getAutoStatus(mac))
+		{
+			
+			if(v.value<v.limit_low){
+				Log.e("demon", "set_data<limit_low:");
+				new Thread(new Runnable() {
+					
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						try {
+							ManagerFactory.getInstance().getManager().getHelper().setHFGPIO(mac, 1, false);
+						} catch (ModuleException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						Log.e("demon", "end send ctrl 3gPIO");
+					}
+					}).start();
+			}else if(v.value>v.limit_up){
+				Log.e("demon", "set_data>limit_upp");
+				new Thread(new Runnable() {
+					
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						try {
+							ManagerFactory.getInstance().getManager().getHelper().setHFGPIO(mac, 2, false);
+						} catch (ModuleException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						Log.e("demon", "end send ctrl 3gPIO");
+					}
+					}).start();
+			}
+			
+		}
+		Log.e("demon", "before send ctrl 3gPIO");
 	}
 	
 	
-	@SuppressLint("NewApi")
-	private void do_data(String name,String mac,String GPIO){
+	
+	private void do_data(String name,final String mac,String GPIO){
 		SharedPreferences share = this.getSharedPreferences(name, Context.MODE_PRIVATE);
 		String xishu = share.getString(mac+"d", "1");
 		String changshu = share.getString(mac + "e", "0");
@@ -138,15 +193,15 @@ public class ADC_Service extends Service {
 		Float cs = Float.valueOf(changshu);
 		Float da = Float.valueOf(GPIO);
 		Float set_data = xs*da+cs;
-		String lower = share.getString(mac+"f", "0");//ÉèÖÃÏÂÏŞ
-		String upper = share.getString(mac+"g", "0");//ÉèÖÃÉÏÏŞ
+		String lower = share.getString(mac+"f", "0");//è®¾ç½®ä¸‹é™
+		String upper = share.getString(mac+"g", "0");//è®¾ç½®ä¸Šé™
 		Float limit_low = Float.valueOf(lower);
 		Float limit_upp = Float.valueOf(upper);
 		if(set_data>limit_low&&set_data<limit_upp||limit_low==0&&limit_upp==0){
-			Log.i("info", "Êı¾İÕı³£");
+			Log.i("info", "æ•°æ®æ­£å¸¸");
 		} else {
-			Log.i("info", "Êı¾İÒì³£");
-			Notice(mac);
+			Log.i("info", "æ•°æ®å¼‚å¸¸:"+set_data);
+			Notice(mac,new Value(limit_low, limit_upp, set_data));
 		}
 	}
 	
@@ -175,27 +230,27 @@ public class ADC_Service extends Service {
 		} 
 	}
 	
-	// ¶Ô»ñÈ¡µ½µÄGPIOÊı¾İ½øĞĞ´¦Àí
+	// å¯¹è·å–åˆ°çš„GPIOæ•°æ®è¿›è¡Œå¤„ç†
 	public void data(String i,String mac){
 		
 		SharedPreferences share = this.getSharedPreferences(i, Context.MODE_PRIVATE);
 		if(i.equals(mac+1)){
-			String xishu = share.getString(mac+"d", "1");//ÏµÊı
-			String changshu = share.getString(mac+"e", "0");//³£Êı
+			String xishu = share.getString(mac+"d", "1");//ç³»æ•°
+			String changshu = share.getString(mac+"e", "0");//å¸¸æ•°
 			Float xs = Float.valueOf(xishu);
 			Float cs = Float.valueOf(changshu);
 			Float da = Float.valueOf(adc1);
-			Float set_data = xs*da+cs;//Ğ£×¼ºóµÄÖµ
+			Float set_data = xs*da+cs;//æ ¡å‡†åçš„å€¼
 
-			String lower = share.getString(mac+"f", "0");//ÉèÖÃÏÂÏŞ
-			String upper = share.getString(mac+"g", "0");//ÉèÖÃÉÏÏŞ
+			String lower = share.getString(mac+"f", "0");//è®¾ç½®ä¸‹é™
+			String upper = share.getString(mac+"g", "0");//è®¾ç½®ä¸Šé™
 			Float limit_low = Float.valueOf(lower);
 			Float limit_upp = Float.valueOf(upper);
 			if(set_data>limit_low&&set_data<limit_upp||limit_low==0&&limit_upp==0){
-				Log.i("info", "Êı¾İÕı³£");
+				Log.i("info", "æ•°æ®æ­£å¸¸");
 			} else {
-				Log.i("info", "Êı¾İÒì³£");
-				Notice(mac);
+				Log.i("info", "æ•°æ®å¼‚å¸¸");
+				Notice(mac,new Value(limit_low, limit_upp, set_data));
 			}
 		} else if(i.equals(mac+2)){
 			String xishu = share.getString(mac+"d", "1");
@@ -203,17 +258,17 @@ public class ADC_Service extends Service {
 			Float xs = Float.valueOf(xishu);
 			Float cs = Float.valueOf(changshu);
 			Float da = Float.valueOf(adc2);
-			Float set_data = xs*da+cs;//Ğ£×¼ºóµÄÖµ
-			//ÉÏÏÂÏŞÉèÖÃ
-			String lower = share.getString(mac+"f", "0");//ÉèÖÃÏÂÏŞ
-			String upper = share.getString(mac+"g", "0");//ÉèÖÃÉÏÏŞ
+			Float set_data = xs*da+cs;//æ ¡å‡†åçš„å€¼
+			//ä¸Šä¸‹é™è®¾ç½®
+			String lower = share.getString(mac+"f", "0");//è®¾ç½®ä¸‹é™
+			String upper = share.getString(mac+"g", "0");//è®¾ç½®ä¸Šé™
 			Float limit_low = Float.valueOf(lower);
 			Float limit_upp = Float.valueOf(upper);
 			if(set_data>limit_low&&set_data<limit_upp||limit_low==0&&limit_upp==0){
-				Log.i("info", "Êı¾İÕı³£");
+				Log.i("info", "æ•°æ®æ­£å¸¸");
 			} else {
-				Log.i("info", "Êı¾İÒì³£");
-				Notice(mac);
+				Log.i("info", "æ•°æ®å¼‚å¸¸");
+				Notice(mac,new Value(limit_low, limit_upp, set_data));
 			}
 		} else if(i.equals(mac+3)){
 			String xishu = share.getString(mac+"d", "1");
@@ -221,17 +276,17 @@ public class ADC_Service extends Service {
 			Float xs = Float.valueOf(xishu);
 			Float cs = Float.valueOf(changshu);
 			Float da = Float.valueOf(adc3);
-			Float set_data = xs*da+cs;//Ğ£×¼ºóµÄÖµ
-			//ÉÏÏÂÏŞÉèÖÃ
-			String lower = share.getString(mac+"f", "0");//ÉèÖÃÏÂÏŞ
-			String upper = share.getString(mac+"g", "0");//ÉèÖÃÉÏÏŞ
+			Float set_data = xs*da+cs;//æ ¡å‡†åçš„å€¼
+			//ä¸Šä¸‹é™è®¾ç½®
+			String lower = share.getString(mac+"f", "0");//è®¾ç½®ä¸‹é™
+			String upper = share.getString(mac+"g", "0");//è®¾ç½®ä¸Šé™
 			Float limit_low = Float.valueOf(lower);
 			Float limit_upp = Float.valueOf(upper);
 			if(set_data>limit_low&&set_data<limit_upp||limit_low==0&&limit_upp==0){
-				Log.i("info", "Êı¾İÕı³£");
+				Log.i("info", "æ•°æ®æ­£å¸¸");
 			} else {
-				Log.i("info", "Êı¾İÒì³£");
-				Notice(mac);
+				Log.i("info", "æ•°æ®å¼‚å¸¸");
+				Notice(mac,new Value(limit_low, limit_upp, set_data));
 			}
 		} else if(i.equals(mac+4)){
 			String xishu = share.getString(mac+"d", "1");
@@ -239,17 +294,17 @@ public class ADC_Service extends Service {
 			Float xs = Float.valueOf(xishu);
 			Float cs = Float.valueOf(changshu);
 			Float da = Float.valueOf(T1);
-			Float set_data = xs*da+cs;//Ğ£×¼ºóµÄÖµ
-			//ÉÏÏÂÏŞÉèÖÃ
-			String lower = share.getString(mac+"f", "0");//ÉèÖÃÏÂÏŞ
-			String upper = share.getString(mac+"g", "0");//ÉèÖÃÉÏÏŞ
+			Float set_data = xs*da+cs;//æ ¡å‡†åçš„å€¼
+			//ä¸Šä¸‹é™è®¾ç½®
+			String lower = share.getString(mac+"f", "0");//è®¾ç½®ä¸‹é™
+			String upper = share.getString(mac+"g", "0");//è®¾ç½®ä¸Šé™
 			Float limit_low = Float.valueOf(lower);
 			Float limit_upp = Float.valueOf(upper);
 			if(set_data>limit_low&&set_data<limit_upp||limit_low==0&&limit_upp==0){
-				Log.i("info", "Êı¾İÕı³£");
+				Log.i("info", "æ•°æ®æ­£å¸¸");
 			} else {
-				Log.i("info", "Êı¾İÒì³£");
-				Notice(mac);
+				Log.i("info", "æ•°æ®å¼‚å¸¸");
+				Notice(mac,new Value(limit_low, limit_upp, set_data));
 			}
 		}else if(i.equals(mac+6)){
 			String xishu = share.getString(mac+"d", "1");
@@ -257,17 +312,17 @@ public class ADC_Service extends Service {
 			Float xs = Float.valueOf(xishu);
 			Float cs = Float.valueOf(changshu);
 			Float da = Float.valueOf(T2);
-			Float set_data = xs*da+cs;//Ğ£×¼ºóµÄÖµ
-			//ÉÏÏÂÏŞÉèÖÃ
-			String lower = share.getString(mac+"f", "0");//ÉèÖÃÏÂÏŞ
-			String upper = share.getString(mac+"g", "0");//ÉèÖÃÉÏÏŞ
+			Float set_data = xs*da+cs;//æ ¡å‡†åçš„å€¼
+			//ä¸Šä¸‹é™è®¾ç½®
+			String lower = share.getString(mac+"f", "0");//è®¾ç½®ä¸‹é™
+			String upper = share.getString(mac+"g", "0");//è®¾ç½®ä¸Šé™
 			Float limit_low = Float.valueOf(lower);
 			Float limit_upp = Float.valueOf(upper);
 			if(set_data>limit_low&&set_data<limit_upp||limit_low==0&&limit_upp==0){
-				Log.i("info", "Êı¾İÕı³£");
+				Log.i("info", "æ•°æ®æ­£å¸¸");
 			} else {
-				Log.i("info", "Êı¾İÒì³£");
-				Notice(mac);
+				Log.i("info", "æ•°æ®å¼‚å¸¸");
+				Notice(mac,new Value(limit_low, limit_upp, set_data));
 			}
 		} else if(i.equals(mac+7)){
 			String xishu = share.getString(mac+"d", "1");
@@ -275,17 +330,17 @@ public class ADC_Service extends Service {
 			Float xs = Float.valueOf(xishu);
 			Float cs = Float.valueOf(changshu);
 			Float da = Float.valueOf(H);
-			Float set_data = xs*da+cs;//Ğ£×¼ºóµÄÖµ
-			//ÉÏÏÂÏŞÉèÖÃ
-			String lower = share.getString(mac+"f", "0");//ÉèÖÃÏÂÏŞ
-			String upper = share.getString(mac+"g", "0");//ÉèÖÃÉÏÏŞ
+			Float set_data = xs*da+cs;//æ ¡å‡†åçš„å€¼
+			//ä¸Šä¸‹é™è®¾ç½®
+			String lower = share.getString(mac+"f", "0");//è®¾ç½®ä¸‹é™
+			String upper = share.getString(mac+"g", "0");//è®¾ç½®ä¸Šé™
 			Float limit_low = Float.valueOf(lower);
 			Float limit_upp = Float.valueOf(upper);
 			if(set_data>limit_low&&set_data<limit_upp||limit_low==0&&limit_upp==0){
-				Log.i("info", "Êı¾İÕı³£");
+				Log.i("info", "æ•°æ®æ­£å¸¸");
 			} else {
-				Log.i("info", "Êı¾İÒì³£");
-				Notice(mac);
+				Log.i("info", "æ•°æ®å¼‚å¸¸");
+				Notice(mac,new Value(limit_low, limit_upp, set_data));
 			}
 		}
 	}
@@ -302,5 +357,10 @@ public class ADC_Service extends Service {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
+	
+	private boolean getAutoStatus(String mac){
+		SharedPreferences sp = getSharedPreferences("AUTOSTATUS", MODE_PRIVATE);
+		return sp.getBoolean(mac, false);
+	}
 }

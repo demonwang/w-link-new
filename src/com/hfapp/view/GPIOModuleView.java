@@ -1,6 +1,7 @@
 package com.hfapp.view;
 
 import java.util.HashMap;
+import java.util.Iterator;
 
 import android.content.Context;
 import android.content.Intent;
@@ -140,9 +141,27 @@ public class GPIOModuleView extends BaseModuleView implements IEventListener {
 		// TODO Auto-generated method stub
 
 		if (this.m_moduleinfo.getMac().equalsIgnoreCase(mac)) {
-			System.out.println(mac);
-			isopen = GM.get(11).getStatus();
-			hand.sendEmptyMessage(1);
+			Iterator<Integer> it = GM.keySet().iterator();
+			while(it.hasNext()){
+				GPIO g = GM.get(it.next());
+				switch (g.getId()) {
+				case 0:
+					//open or close 
+					break;
+				case 1:
+					// open or close 
+					break;
+				case 2:
+					// open or close
+					break;
+				case 11:
+					isopen = GM.get(11).getStatus();
+					hand.sendEmptyMessage(1);
+					break;
+				default:
+					break;
+				}
+			}			
 		}
 	}
 
