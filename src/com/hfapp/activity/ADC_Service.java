@@ -349,6 +349,7 @@ public class ADC_Service extends Service {
 	@Override
 	public void onDestroy() {
 		stopSelf();
+		noticeManager.cancelAll();
 		super.onDestroy();
 	}
 
